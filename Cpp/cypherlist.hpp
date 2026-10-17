@@ -6,6 +6,9 @@
 using namespace std;
 
 namespace encr{
+	void runEncrypt(char& choice);
+	string caesar(const string& STR, int SHIFT);
+	
 	void runEncrypt(char& choice){
 		//Variables:
 		string str;
@@ -13,15 +16,17 @@ namespace encr{
 		//Logic:
 		cout << "Enter string to encode: "; cin >> str; cout << endl;
 		
-		switch (choice) {
-			case 'C':
+		switch (choice) { 
+			case 'C':{
 				int shift = 5;
 				cout << "Enter shift distance (standard = 5): "; cin >> shift; cout << endl;
 				cout << "Encrypted string: " << caesar(str, shift) << endl;
 				break;
-			case 'H':
+			}//IMPORTANT NOTE: the brackets introduce a block scope to keep cross initialisation errors from popping up (int shift = 5)
+			case 'H':{
 				cout << "Encrypted string: " << hexlock(str) << endl;
 				break;
+			}
 			default:
 				cout << "No valid option has been selected. Aborting..." << endl;
 				break;
@@ -59,6 +64,9 @@ namespace encr{
 }
 
 namespace decr{
+	void runDecrypt(char& choice);
+	string caesar(const string& STR, int& SHIFT);
+	
 	void runDecrypt(char& choice){
 		//Variables:
 		string str;
@@ -67,14 +75,16 @@ namespace decr{
 		cout << "Enter string to decode: "; cin >> str; cout << endl;
 		
 		switch (choice) {
-			case 'C':
+			case 'C':{
 				int shift = 5;
 				cout << "Enter shift distance (standard = 5): "; cin >> shift; cout << endl;
 				cout << "Decrypted string: " << caesar(str, shift) << endl;
 				break;
-			case 'H':
+			}
+			case 'H':{
 				cout << "Decrypted string: " << hexlock(str) << endl;
 				break;
+			}
 			default:
 				cout << "No valid option has been selected. Aborting..." << endl;
 				break;
