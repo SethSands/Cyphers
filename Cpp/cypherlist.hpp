@@ -8,6 +8,7 @@ using namespace std;
 namespace encr{
 	void runEncrypt(char& choice);
 	string caesar(const string& STR, int SHIFT);
+	string hexlock(const string& STR);
 	
 	void runEncrypt(char& choice){
 		//Variables:
@@ -58,7 +59,7 @@ namespace encr{
 		return new_STR;
 	}
 	
-	string hexlock(string& STR){
+	string hexlock(const string& STR){
 		return "B16"; //Placeholder return
 	}
 }
@@ -66,6 +67,7 @@ namespace encr{
 namespace decr{
 	void runDecrypt(char& choice);
 	string caesar(const string& STR, int& SHIFT);
+	string hexkey(const string& STR);
 	
 	void runDecrypt(char& choice){
 		//Variables:
@@ -82,7 +84,7 @@ namespace decr{
 				break;
 			}
 			case 'H':{
-				cout << "Decrypted string: " << hexlock(str) << endl;
+				cout << "Decrypted string: " << hexkey(str) << endl;
 				break;
 			}
 			default:
@@ -116,7 +118,7 @@ namespace decr{
 		return new_STR;
 	}
 	
-	string hexkey(){
+	string hexkey(const string& STR){
 		return "B16 -> 0"; //Placeholder return
 	}
 }
