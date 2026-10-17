@@ -27,7 +27,7 @@ int main(){
 		else{
 			cout << "Invalid entry made. Please choose from the above given options, entering 'E' or 'D', or 'Q' to quit. Remember that the entry is case sensitive." << endl;
 		}
-	}	while (enc_dec_choice != 'Q')
+	}	while (enc_dec_choice != 'Q');
 	
 	return 0;
 }
