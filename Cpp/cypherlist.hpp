@@ -3,12 +3,14 @@
 #include <string>
 #include <algorithm>
 #include <iterator>
+#include <sstream>
+#include <iomanip>
 using namespace std;
 
 namespace encr{
 	void runEncrypt(char& choice);
 	string caesar(const string& STR, int SHIFT);
-	string hexlock(const string& STR);
+	string hexLock(const string& STR);
 	
 	void runEncrypt(char& choice){
 		//Variables:
@@ -47,7 +49,7 @@ namespace encr{
 			SHIFT -= 90; //Ensure that shift remains in the string bounds of shift_set
 		}
 		
-		for (int i = 0; i <= STR.length(); i++){
+		for (int i = 0; i < STR.length(); i++){
 			if (i + SHIFT >= 90){//certain edge cases may slip through, this is to prevent them from crashing the program
 				new_STR += shift_set[distance(begin(shift_set), find(begin(shift_set), end(shift_set), STR[i])) + SHIFT - 90];
 			}
@@ -59,15 +61,23 @@ namespace encr{
 		return new_STR;
 	}
 	
-	string hexlock(const string& STR){
-		return "B16"; //Placeholder return
+	string hexLock(const string& STR){
+		//Variables:
+		stringstream new_STR;
+		
+		//Logic:
+		for (int i = 0; i < STR.length(); i++){
+			new_STR << hex << setw(2) << setfill('0') << static_cast<int>(STR[i]);
+		}// new_STR << hex conversion << witdh formatting << blanks as 0 << explicit converstion to int (current character)
+		
+		return new_STR.str();
 	}
 }
 
 namespace decr{
 	void runDecrypt(char& choice);
 	string caesar(const string& STR, int& SHIFT);
-	string hexkey(const string& STR);
+	string hexKey(const string& STR);
 	
 	void runDecrypt(char& choice){
 		//Variables:
@@ -106,7 +116,7 @@ namespace decr{
 			SHIFT -= 90; //Ensure that shift remains in the string bounds of shift_set
 		}
 		
-		for (int i = 0; i <= STR.length(); i++){
+		for (int i = 0; i < STR.length(); i++){
 			if (i + SHIFT >= 90){//certain edge cases may slip through, this is to prevent them from crashing the program
 				new_STR += shift_set[distance(begin(shift_set), find(begin(shift_set), end(shift_set), STR[i])) - SHIFT + 90];
 			}
@@ -118,7 +128,15 @@ namespace decr{
 		return new_STR;
 	}
 	
-	string hexkey(const string& STR){
-		return "B16 -> 0"; //Placeholder return
+	string hexKey(const string& STR){
+		//Variables:
+		string new_STR;
+		
+		//Logic:
+		for (int i = 0; i < STR.length(); i += 2){
+			new_STR += static_cast<char>(stoi(STR.substr(i, 2), nullptr, 16));
+		}// new_STR += explicit type conversion to char (int interpretation (substring, nullptr -- v imp., numeral base))
+		
+		return new_STR;
 	}
 }
