@@ -9,35 +9,33 @@ using namespace std;
 
 namespace encr{
 	void runEncrypt(char& choice);
-	string caesar(const string& STR, int SHIFT);
+	string caesar(const string& STR, const int& SHIFT);
 	string hexLock(const string& STR);
 	string gridLock(const string& STR, const int shift = 0, const bool vert_orient = false);
 	
 	void runEncrypt(char& choice){
 		//Variables:
 		string str;
+		int shift = 5;
 		
 		//Logic:
 		cout << "Enter string to encode: "; cin >> str; cout << endl;
 		
 		switch (choice) { 
-			case 'C':{
-				int shift = 5;
+			case 'C':
 				cout << "Enter shift distance (standard = 5): "; cin >> shift; cout << endl;
 				cout << "Encrypted string: " << caesar(str, shift) << endl;
 				break;
-			}//IMPORTANT NOTE: the brackets introduce a block scope to keep cross initialisation errors from popping up (int shift = 5)
-			case 'H':{
+			case 'H':
 				cout << "Encrypted string: " << hexlock(str) << endl;
 				break;
-			}
 			default:
 				cout << "No valid option has been selected. Aborting..." << endl;
 				break;
 		}
 	}
 	
-	string caesar(const string& STR, int SHIFT){
+	string caesar(const string& STR, const int& SHIFT){
 		//Variables:
 		string new_STR;
 		char shift_set[90] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
@@ -75,41 +73,40 @@ namespace encr{
 	}
 	
 	string gridLock(const string& STR, const int shift = 0, const bool vert_orient = false){
+		
 		return "9x9"; //Placeholder return
 	}
 }
 
 namespace decr{
 	void runDecrypt(char& choice);
-	string caesar(const string& STR, int& SHIFT);
+	string caesar(const string& STR, const int& SHIFT);
 	string hexKey(const string& STR);
 	string gridKey(const string& STR, const int shift = 0, const bool vert_orient = false);
 	
 	void runDecrypt(char& choice){
 		//Variables:
 		string str;
+		int shift = 5;
 		
 		//Logic:
 		cout << "Enter string to decode: "; cin >> str; cout << endl;
 		
 		switch (choice) {
-			case 'C':{
-				int shift = 5;
+			case 'C':
 				cout << "Enter shift distance (standard = 5): "; cin >> shift; cout << endl;
 				cout << "Decrypted string: " << caesar(str, shift) << endl;
 				break;
-			}
-			case 'H':{
+			case 'H':
 				cout << "Decrypted string: " << hexkey(str) << endl;
 				break;
-			}
 			default:
 				cout << "No valid option has been selected. Aborting..." << endl;
 				break;
 		}
 	}
 	
-	string caesar(const string& STR, int& SHIFT){
+	string caesar(const string& STR, const int& SHIFT){
 		//Variables:
 		string new_STR;
 		char shift_set[90] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
