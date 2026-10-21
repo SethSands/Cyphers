@@ -5,6 +5,7 @@
 #include <iterator>
 #include <sstream>
 #include <iomanip>
+#include <map>
 using namespace std;
 
 namespace encr{
@@ -73,7 +74,29 @@ namespace encr{
 	}
 
 	string gridLock(const string& STR, const int shift = 0, const bool vert_orient = false){
-		//array 'row'
+		//Variables:
+		char row[9] = {'0', '1', '2', '3', '4', '5', '6', '7', '8'};
+		char col[9] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'};
+		string grid_code[9][9];
+		char grid_key[9][9] = {
+			{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'}, {'J', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S'},
+			{'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b'}, {'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k'}, 
+			{'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't'}, {'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3'}, 
+			{'4', '5', '6', '7', '8', '9', '0', ',', '.'}, {'!', '@', '#', '$', '%', '^', '&', '*', '('}, 
+			{')', ';', ':', '\'', '\"', '/', '\\', '?', ' '}}
+			;
+		map<string, string> grid_final;
+		
+		//Logic:
+		for (int i = 0; i < 10; i++){
+			for (int j = 0; j < 10; j++){
+				grid[i][j] = row[i] + col[j]; //Assigning the value of each grid square
+			}
+		}
+		
+		grid_final{grid_key, grid_code};
+		
+		
 		return "9x9"; //Placeholder return
 	}
 }
