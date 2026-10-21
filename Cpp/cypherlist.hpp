@@ -15,13 +15,14 @@ namespace encr{
 	void runEncrypt(char& choice){
 		//Variables:
 		string str;
-		int shift = 5;
+		int shift;
 		
 		//Logic:
 		cout << "Enter string to encode: "; cin >> str; cout << endl;
 		
 		switch (choice) { 
 			case 'C':
+				shift = 5;
 				cout << "Enter shift distance (standard = 5): "; cin >> shift; cout << endl;
 				cout << "Encrypted string: " << caesar(str, shift) << endl;
 				break;
@@ -72,38 +73,33 @@ namespace encr{
 	}
 
 	string gridLock(const string& STR, const int shift = 0, const bool vert_orient = false){
-		
+		//array 'row'
 		return "9x9"; //Placeholder return
 	}
 }
 
 namespace decr{
 	void runDecrypt(char& choice);
-<<<<<<< HEAD
 	string caesar(const string& STR, const int& SHIFT);
 	string hexKey(const string& STR);
-=======
-	string caesar(const string& STR, int& SHIFT);
->>>>>>> parent of 0c0b2c1 (HOTFIX 2: hexlock() Declaration and Argument Mismatch)
 	
 	void runDecrypt(char& choice){
 		//Variables:
 		string str;
-		int shift = 5;
+		int shift;
 		
 		//Logic:
 		cout << "Enter string to decode: "; cin >> str; cout << endl;
 		
 		switch (choice) {
-			case 'C':{
+			case 'C':
+				shift = 5;
 				cout << "Enter shift distance (standard = 5): "; cin >> shift; cout << endl;
 				cout << "Decrypted string: " << caesar(str, shift) << endl;
-			}
 				break;
-			case 'H':{
+			case 'H':
 				cout << "Decrypted string: " << hexlock(str) << endl;
 				break;
-				}
 			default:
 				cout << "No valid option has been selected. Aborting..." << endl;
 				break;
