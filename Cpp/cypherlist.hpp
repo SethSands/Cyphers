@@ -79,8 +79,12 @@ namespace encr{
 
 namespace decr{
 	void runDecrypt(char& choice);
+<<<<<<< HEAD
 	string caesar(const string& STR, const int& SHIFT);
 	string hexKey(const string& STR);
+=======
+	string caesar(const string& STR, int& SHIFT);
+>>>>>>> parent of 0c0b2c1 (HOTFIX 2: hexlock() Declaration and Argument Mismatch)
 	
 	void runDecrypt(char& choice){
 		//Variables:
@@ -91,13 +95,15 @@ namespace decr{
 		cout << "Enter string to decode: "; cin >> str; cout << endl;
 		
 		switch (choice) {
-			case 'C':
+			case 'C':{
 				cout << "Enter shift distance (standard = 5): "; cin >> shift; cout << endl;
 				cout << "Decrypted string: " << caesar(str, shift) << endl;
+			}
 				break;
-			case 'H':
-				cout << "Decrypted string: " << hexkey(str) << endl;
+			case 'H':{
+				cout << "Decrypted string: " << hexlock(str) << endl;
 				break;
+				}
 			default:
 				cout << "No valid option has been selected. Aborting..." << endl;
 				break;
