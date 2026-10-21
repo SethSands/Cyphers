@@ -11,7 +11,6 @@ namespace encr{
 	void runEncrypt(char& choice);
 	string caesar(const string& STR, const int& SHIFT);
 	string hexLock(const string& STR);
-	string gridLock(const string& STR, const int shift = 0, const bool vert_orient = false);
 	
 	void runEncrypt(char& choice){
 		//Variables:
@@ -71,7 +70,7 @@ namespace encr{
 		
 		return new_STR.str();
 	}
-	
+
 	string gridLock(const string& STR, const int shift = 0, const bool vert_orient = false){
 		
 		return "9x9"; //Placeholder return
@@ -82,7 +81,6 @@ namespace decr{
 	void runDecrypt(char& choice);
 	string caesar(const string& STR, const int& SHIFT);
 	string hexKey(const string& STR);
-	string gridKey(const string& STR, const int shift = 0, const bool vert_orient = false);
 	
 	void runDecrypt(char& choice){
 		//Variables:
@@ -141,9 +139,5 @@ namespace decr{
 		}// new_STR += explicit type conversion to char (int interpretation (substring, nullptr -- v imp., numeral base))
 		
 		return new_STR;
-	}
-	
-	string gridKey(const string& STR, const int shift = 0, const bool vert_orient = false){
-		return "9x9 - solved"; //Placeholder return
 	}
 }
