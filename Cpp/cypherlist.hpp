@@ -100,12 +100,12 @@ namespace encr{
 		}
 		for (int i = 0; i < 9; i++){
 			for (int j = 0; j < 9; j++){
-				grid_final[grid_plain[i][j]] = grid_code[i][j];
+				grid_final[grid_plain[i][j]] = grid_code[i][j]; //assigning key-value pairs within map grid_final
 			}
 		}
 
 		for (int i = 0; i < STR.length(); i++){
-			new_STR += grid_final[STR[i]];
+			new_STR += grid_final[STR[i]]; //encoding
 		}
 
 		return new_STR;
@@ -124,7 +124,7 @@ namespace decr{
 		int shift;
 		
 		//Logic:
-		cin.ignore()
+		cin.ignore();
 		cout << "Enter string to decode: "; getline(cin, str); cout << endl;
 		
 		switch (choice) {
@@ -137,7 +137,7 @@ namespace decr{
 				cout << "Decrypted string: " << hexKey(str) << endl;
 				break;
 			case 'G':
-				cout << "Decrypted string: " << gridkey(str) << endl;
+				cout << "Decrypted string: " << gridKey(str) << endl;
 				break;
 			default:
 				cout << "No valid option has been selected. Aborting..." << endl;
@@ -182,7 +182,7 @@ namespace decr{
 		return new_STR;
 	}
 	
-	string gridKey(const string& STR, const int shift = 0, const bool vert_orient = false){
+	string gridKey(const string& STR, const int shift, const bool vert_orient){
 		//Variables:
 		char row[9] = {'0', '1', '2', '3', '4', '5', '6', '7', '8'};
 		char col[9] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'};
@@ -193,12 +193,25 @@ namespace decr{
 			{'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't'}, {'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3'}, 
 			{'4', '5', '6', '7', '8', '9', '0', ',', '.'}, {'!', '@', '#', '$', '%', '^', '&', '*', '('}, 
 			{')', ';', ':', '\'', '\"', '/', '\\', '?', ' '}};
-		map<char, string> grid_final;
+		map<string, char> grid_final;
 		string new_STR;
 		
 		//Logic:
+		for (int i = 0; i < 9; i++){
+			for (int j = 0; j < 9; j++){
+				grid_code[i][j] = string(1, row[i]) + col[j]; //Assigning the value of each grid square
+			}
+		}
+		for (int i = 0; i < 9; i++){
+			for (int j = 0; j < 9; j++){
+				grid_final[grid_code[i][j]] = grid_plain[i][j]; // key-value pairs, reversed for decryption
+			}
+		}
 		
+		for (int i = 0; i < STR.length(); i += 2){
+			new_STR += grid_final[STR.substr(i, 2)]; // substring instead of index, since the map is reversed and 2 chars = 1 char
+		}
 		
-		return "9x9key"; //Placeholder return
+		return new_STR;
 	}
 }
