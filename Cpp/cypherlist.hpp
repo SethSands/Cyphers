@@ -12,7 +12,7 @@ namespace encr{
 	void runEncrypt(char& choice);
 	string caesar(const string& STR, int& SHIFT);
 	string hexLock(const string& STR);
-	string gridLock(const string& STR, const int shift = 0, const bool vert_orient = false);
+	string gridLock(const string& STR, const int shift = 0, const bool vert_orient = false); // Shift and orient funtcionality currently disabled
 	
 	void runEncrypt(char& choice){
 		//Variables:
@@ -116,6 +116,7 @@ namespace decr{
 	void runDecrypt(char& choice);
 	string caesar(const string& STR, int& SHIFT);
 	string hexKey(const string& STR);
+	string gridKey(const string& STR, const int shift = 0, const bool vert_orient = false); //Shift and Orient functionality currently disabled
 	
 	void runDecrypt(char& choice){
 		//Variables:
@@ -123,7 +124,8 @@ namespace decr{
 		int shift;
 		
 		//Logic:
-		cout << "Enter string to decode: "; cin >> str; cout << endl;
+		cin.ignore()
+		cout << "Enter string to decode: "; getline(cin, str); cout << endl;
 		
 		switch (choice) {
 			case 'C':
@@ -133,6 +135,9 @@ namespace decr{
 				break;
 			case 'H':
 				cout << "Decrypted string: " << hexKey(str) << endl;
+				break;
+			case 'G':
+				cout << "Decrypted string: " << gridkey(str) << endl;
 				break;
 			default:
 				cout << "No valid option has been selected. Aborting..." << endl;
@@ -175,5 +180,15 @@ namespace decr{
 		}// new_STR += explicit type conversion to char (int interpretation (substring, nullptr -- v imp., numeral base))
 		
 		return new_STR;
+	}
+	
+	string gridKey(const string& STR, const int shift = 0, const bool vert_orient = false){
+		//Variables:
+		string new_STR;
+		
+		//Logic:
+		
+		
+		return "9x9key"; //Placeholder return
 	}
 }
