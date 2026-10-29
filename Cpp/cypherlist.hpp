@@ -10,8 +10,9 @@ using namespace std;
 
 namespace encr{
 	void runEncrypt(char& choice);
-	string caesar(const string& STR, const int& SHIFT);
+	string caesar(const string& STR, int& SHIFT);
 	string hexLock(const string& STR);
+	string gridLock(const string& STR, const int shift = 0, const bool vert_orient = false);
 	
 	void runEncrypt(char& choice){
 		//Variables:
@@ -19,7 +20,8 @@ namespace encr{
 		int shift;
 		
 		//Logic:
-		cout << "Enter string to encode: "; cin >> str; cout << endl;
+		cin.ignore(); //Empty out input
+		cout << "Enter string to encode: "; getline(cin, str); cout << endl;
 		
 		switch (choice) { 
 			case 'C':
@@ -28,7 +30,10 @@ namespace encr{
 				cout << "Encrypted string: " << caesar(str, shift) << endl;
 				break;
 			case 'H':
-				cout << "Encrypted string: " << hexlock(str) << endl;
+				cout << "Encrypted string: " << hexLock(str) << endl;
+				break;
+			case 'G':
+				cout << "Encrypted string: " << gridLock(str) << endl;
 				break;
 			default:
 				cout << "No valid option has been selected. Aborting..." << endl;
@@ -36,7 +41,7 @@ namespace encr{
 		}
 	}
 	
-	string caesar(const string& STR, const int& SHIFT){
+	string caesar(const string& STR, int& SHIFT){
 		//Variables:
 		string new_STR;
 		char shift_set[90] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
@@ -73,37 +78,43 @@ namespace encr{
 		return new_STR.str();
 	}
 
-	string gridLock(const string& STR, const int shift = 0, const bool vert_orient = false){
+	string gridLock(const string& STR, const int shift, const bool vert_orient){
 		//Variables:
 		char row[9] = {'0', '1', '2', '3', '4', '5', '6', '7', '8'};
 		char col[9] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'};
 		string grid_code[9][9];
-		char grid_key[9][9] = {
+		char grid_plain[9][9] = {
 			{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'}, {'J', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S'},
 			{'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b'}, {'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k'}, 
 			{'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't'}, {'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3'}, 
 			{'4', '5', '6', '7', '8', '9', '0', ',', '.'}, {'!', '@', '#', '$', '%', '^', '&', '*', '('}, 
-			{')', ';', ':', '\'', '\"', '/', '\\', '?', ' '}}
-			;
-		map<string, string> grid_final;
-		
+			{')', ';', ':', '\'', '\"', '/', '\\', '?', ' '}};
+		map<char, string> grid_final;
+		string new_STR;
+
 		//Logic:
-		for (int i = 0; i < 10; i++){
-			for (int j = 0; j < 10; j++){
-				grid[i][j] = row[i] + col[j]; //Assigning the value of each grid square
+		for (int i = 0; i < 9; i++){
+			for (int j = 0; j < 9; j++){
+				grid_code[i][j] = string(1, row[i]) + col[j]; //Assigning the value of each grid square
 			}
 		}
-		
-		grid_final{grid_key, grid_code};
-		
-		
-		return "9x9"; //Placeholder return
+		for (int i = 0; i < 9; i++){
+			for (int j = 0; j < 9; j++){
+				grid_final[grid_plain[i][j]] = grid_code[i][j];
+			}
+		}
+
+		for (int i = 0; i < STR.length(); i++){
+			new_STR += grid_final[STR[i]];
+		}
+
+		return new_STR;
 	}
 }
 
 namespace decr{
 	void runDecrypt(char& choice);
-	string caesar(const string& STR, const int& SHIFT);
+	string caesar(const string& STR, int& SHIFT);
 	string hexKey(const string& STR);
 	
 	void runDecrypt(char& choice){
@@ -121,7 +132,7 @@ namespace decr{
 				cout << "Decrypted string: " << caesar(str, shift) << endl;
 				break;
 			case 'H':
-				cout << "Decrypted string: " << hexlock(str) << endl;
+				cout << "Decrypted string: " << hexKey(str) << endl;
 				break;
 			default:
 				cout << "No valid option has been selected. Aborting..." << endl;
@@ -129,7 +140,7 @@ namespace decr{
 		}
 	}
 	
-	string caesar(const string& STR, const int& SHIFT){
+	string caesar(const string& STR, int& SHIFT){
 		//Variables:
 		string new_STR;
 		char shift_set[90] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
