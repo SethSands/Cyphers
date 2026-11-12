@@ -55,12 +55,14 @@ namespace encr{
 		}
 		
 		for (int i = 0; i < STR.length(); i++){
-			if (i + SHIFT >= 90){//certain edge cases may slip through, this is to prevent them from crashing the program
-				new_STR += shift_set[distance(begin(shift_set), find(begin(shift_set), end(shift_set), STR[i])) + SHIFT - 90];
+			char char_finder = distance(begin(shift_set), find(begin(shift_set), end(shift_set), STR[i]));
+			//char_index_finder(shift_set_start, iterator(shift_set_start, shift_set_end, current_STR_char_index))
+			if (char_finder + SHIFT >= 90){//certain edge cases may slip through, this is to prevent them from crashing the program
+				new_STR += shift_set[char_finder + SHIFT - 90];
 			}
 			else {
-				new_STR += shift_set[distance(begin(shift_set), find(begin(shift_set), end(shift_set), STR[i])) + SHIFT];
-			}// shift_set[char_index_finder(shift_set_start, iterator(shift_set_start, shift_set_end, current_STR_char_index)) + SHIFT] 
+				new_STR += shift_set[char_finder + SHIFT]; // Find and add the new character
+			} 
 		}
 		
 		return new_STR;
@@ -159,12 +161,14 @@ namespace decr{
 		}
 		
 		for (int i = 0; i < STR.length(); i++){
-			if (i + SHIFT >= 90){//certain edge cases may slip through, this is to prevent them from crashing the program
-				new_STR += shift_set[distance(begin(shift_set), find(begin(shift_set), end(shift_set), STR[i])) - SHIFT + 90];
+			char char_finder = distance(begin(shift_set), find(begin(shift_set), end(shift_set), STR[i]));
+			//char_index_finder(shift_set_start, iterator(shift_set_start, shift_set_end, current_STR_char_index))
+			if (char_finder + SHIFT >= 90){//certain edge cases may slip through, this is to prevent them from crashing the program
+				new_STR += shift_set[char_finder - SHIFT + 90];
 			}
 			else {
-				new_STR += shift_set[distance(begin(shift_set), find(begin(shift_set), end(shift_set), STR[i])) - SHIFT];
-			}// shift_set[char_index_finder(shift_set_start, iterator(shift_set_start, shift_set_end, current_STR_char_index)) + SHIFT] 
+				new_STR += shift_set[char_finder - SHIFT]; // Find and add the new character
+			}
 		}
 		
 		return new_STR;
